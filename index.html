@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AImóveis - API</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: "hsl(204, 98%, 61%)", // #39a8fd
+                            foreground: "hsl(0, 0%, 100%)", // White text for contrast
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen flex-col">
+    <header id="main-header" class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 transition-all duration-300">
+        <div class="container mx-auto flex h-16 items-center justify-between px-4">
+            <a href="#" class="flex items-center">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Design%20sem%20nome%20(1)-FdPpU1arWajG6dSjrQ8p0zUj6khZKb.png" alt="Aimoveis Logo" class="h-12 w-auto">
+            </a>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <a href="#hero" class="transition-colors hover:text-primary">Início</a>
+                <a href="#properties" class="transition-colors hover:text-primary">Imóveis</a>
+                <a href="#features" class="transition-colors hover:text-primary">Recursos</a>
+                <a href="#api" class="transition-colors hover:text-primary">API</a>
+                <a href="#pricing" class="transition-colors hover:text-primary">Preços</a>
+                <a href="#about" class="transition-colors hover:text-primary">Sobre</a>
+            </nav>
+            <button class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors">
+                Começar Agora
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-1">
+        <section id="hero" class="relative py-24">
+            <div class="absolute inset-0 bg-gradient-to-b from-white via-white/90 to-white">
+                <div class="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+            </div>
+
+            <div class="container mx-auto px-4 relative">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="space-y-8" data-aos="fade-right">
+                        <div class="space-y-6">
+                            <h1 class="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
+                                Encontre o Imóvel
+                                <span class="bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
+                                    Perfeito
+                                </span>
+                            </h1>
+                            <p class="max-w-[42rem] leading-normal text-gray-600 sm:text-xl sm:leading-8">
+                                API inteligente de recomendação de imóveis. Encontre as melhores opções para seus clientes com
+                                base em preferências, estilo de vida e necessidades específicas.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-4">
+                            <button class="bg-primary text-white px-6 py-3 rounded-md hover:bg-primary/90 transition-colors flex items-center gap-2">
+                                Integrar API
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-white"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                            </button>
+                            <button class="bg-white text-gray-900 px-6 py-3 rounded-md border border-gray-300 hover:bg-gray-50 transition-colors">
+                                Ver Documentação
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-8">
+                            <div class="space-y-2" data-aos="fade-up" data-aos-delay="100">
+                                <h4 class="text-4xl font-bold text-primary">50k+</h4>
+                                <p class="text-sm text-gray-600">Imóveis Cadastrados</p>
+                            </div>
+                            <div class="space-y-2" data-aos="fade-up" data-aos-delay="200">
+                                <h4 class="text-4xl font-bold text-primary">98%</h4>
+                                <p class="text-sm text-gray-600">Taxa de Precisão</p>
+                            </div>
+                            <div class="space-y-2" data-aos="fade-up" data-aos-delay="300">
+                                <h4 class="text-4xl font-bold text-primary">1M+</h4>
+                                <p class="text-sm text-gray-600">Buscas Mensais</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative hidden lg:block" data-aos="fade-left">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 rounded-2xl blur-3xl"></div>
+                        <div class="relative bg-white rounded-2xl border p-6 shadow-2xl">
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="space-y-1">
+                                        <h3 class="font-semibold">Recomendação Inteligente</h3>
+                                        <p class="text-sm text-gray-600">Baseada em IA</p>
+                                    </div>
+                                    <button class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+                                        Nova Busca
+                                    </button>
+                                </div>
+                                <div class="bg-gray-100 p-4 rounded-lg">
+                                    <p class="text-sm italic text-gray-600">
+                                        "Procuro um apartamento para minha família. Somos um casal com dois filhos pequenos, ambos
+                                        trabalhamos em período integral e temos uma rotina agitada. Precisamos de um espaço
+                                        confortável, mas de fácil manutenção, próximo a escolas e com boa segurança. Um condomínio com
+                                        áreas de lazer para as crianças seria ideal."
+                                    </p>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-white p-4 rounded-lg border">
+                                        <div class="flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                            <span class="text-sm">3 Quartos</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-lg border">
+                                        <div class="flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"></path><line x1="10" y1="16" x2="8" y2="16"></line><line x1="20" y1="10" x2="13" y2="3"></line><line x1="18" y1="12" x2="15" y2="9"></line></svg>
+                                            <span class="text-sm">2 Banheiros</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-lg border">
+                                        <div class="flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                                            <span class="text-sm">120m²</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-lg border">
+                                        <div class="flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
+                                            <span class="text-sm">Fácil Manutenção</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Recomendamos imóveis em condomínios fechados, com 3 quartos, áreas de lazer, próximos a escolas
+                                    e serviços essenciais. Priorizamos acabamentos de fácil limpeza e layouts eficientes para
+                                    otimizar seu tempo.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="properties" class="bg-gray-100 py-24">
+            <div class="container mx-auto px-4 space-y-12">
+                <h2 class="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl" data-aos="fade-up">
+                    Imóvel Recomendado
+                </h2>
+                <div class="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-2xl border p-6 shadow-lg space-y-4" data-aos="fade-right">
+                        <div class="space-y-2">
+                            <h3 class="text-xl font-semibold">Recomendação Inteligente</h3>
+                            <p class="text-sm text-gray-600">Baseada em IA</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <p class="text-sm italic text-gray-600">
+                                "Procuro um apartamento para minha família. Somos um casal com dois filhos pequenos, ambos trabalhamos em período integral e temos uma rotina agitada. Precisamos de um espaço confortável, mas de fácil manutenção, próximo a escolas e com boa segurança. Um condomínio com áreas de lazer para as crianças seria ideal."
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded-lg border">
+                                <div class="flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                    <span class="text-sm">3 Quartos</span>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border">
+                                <div class="flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"></path><line x1="10" y1="16" x2="8" y2="16"></line><line x1="20" y1="10" x2="13" y2="3"></line><line x1="18" y1="12" x2="15" y2="9"></line></svg>
+                                    <span class="text-sm">2 Banheiros</span>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border">
+                                <div class="flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                                    <span class="text-sm">120m²</span>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border">
+                                <div class="flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
+                                    <span class="text-sm">Fácil Manutenção</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            Recomendamos imóveis em condomínios fechados, com 3 quartos, áreas de lazer, próximos a escolas
+                            e serviços essenciais. Priorizamos acabamentos de fácil limpeza e layouts eficientes para
+                            otimizar seu tempo.
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-2xl border p-6 shadow-lg space-y-6" data-aos="fade-left">
+                        <div class="aspect-video rounded-lg bg-gray-200 overflow-hidden">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/apartamento_jardim_das_accias_3_quartos_2_banheiros_110m_2_vagas_de_garagem_crie_uma_foto_da_vista__vplyfjt3uj6rbkwp907s_3-079lCJ1VZBvmxJtjjnxE756Oc9zJJc.png" alt="Vista deslumbrante da sala de estar com grandes janelas e vista para as montanhas" class="object-cover w-full h-full">
+                        </div>
+                        <div class="space-y-4">
+                            <h3 class="text-2xl font-semibold">Apartamento Jardim das Acácias</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                <div class="bg-white p-3 rounded-lg border flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-primary mb-2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                    <span class="text-sm">3 Quartos</span>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-primary mb-2"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="10" y1="16" x2="8" y2="16"/><line x1="20" y1="10" x2="13" y2="3"/><line x1="18" y1="12" x2="15" y2="9"/></svg>
+                                    <span class="text-sm">2 Banheiros</span>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-primary mb-2"><path d="M3 3v18h18"/><path d="M7 17v-4"/><path d="M11 17v-9"/><path d="M15 17v-5"/><path d="M19 17v-11"/></svg>
+                                    <span class="text-sm">110m²</span>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-primary mb-2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                                    <span class="text-sm">2 Vagas</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-primary"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                <span>Rua das Flores, 123 - Jardim Primavera</span>
+                            </div>
+                            <p class="text-sm text-gray-600">
+                                Apartamento em condomínio fechado com segurança 24h, área de lazer completa, próximo a escolas e
+                                comércio. Acabamento moderno e de fácil manutenção, ideal para famílias com crianças.
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold">R$ 550.000</span>
+                                <button class="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/90 transition-colors">
+                                    Ver Detalhes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-24">
+            <div class="container mx-auto px-4 space-y-12">
+                <h2 class="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl" data-aos="fade-up">
+                    Recursos Principais
+                </h2>
+                <div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3">
+                    <div class="bg-white rounded-lg border p-6 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Busca Inteligente</h3>
+                        <p class="text-sm text-gray-600">Sistema avançado de busca com filtros personalizados e recomendações baseadas em IA.</p>
+                    </div>
+                    <div class="bg-white rounded-lg border p-6 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Análise de Mercado</h3>
+                        <p class="text-sm text-gray-600">Dados em tempo real sobre o mercado imobiliário e tendências de preços por região.</p>
+                    </div>
+                    <div class="bg-white rounded-lg border p-6 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                        <div class="mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Integração Simples</h3>
+                        <p class="text-sm text-gray-600">API REST de fácil integração com documentação completa e suporte técnico.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="api" class="bg-gray-100 py-24">
+            <div class="container mx-auto px-4 space-y-12">
+                <div class="text-center space-y-4">
+                    <h2 class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl" data-aos="fade-up">Como Funciona</h2>
+                    <p class="text-xl text-gray-600 max-w-[42rem] mx-auto" data-aos="fade-up" data-aos-delay="100">
+                        Veja como nossa API de recomendação pode transformar sua plataforma imobiliária.
+                    </p>
+                </div>
+                <div class="max-w-4xl mx-auto space-y-8">
+                    <div class="space-y-4" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-2xl font-semibold text-primary">1. Justificativa</h3>
+                        <p class="text-gray-600">
+                            Explica o raciocínio por trás da recomendação, considerando a localização do trabalho, escola e
+                            necessidades da família.
+                        </p>
+                        <div class="bg-black/90 p-6 rounded-lg">
+                            <pre class="text-green-400 font-mono text-xs whitespace-pre-wrap">
+"justificativa": "Considerando sua rotina, onde você trabalha no Bairro Barroca e seus filhos estudam no Bairro Betânia, o ideal é buscar um imóvel localizado em uma área intermediária, como o Barreiro ou Estoril, que facilite os deslocamentos diários. 
+
+A sugestão é por uma casa espaçosa que ofereça privacidade e conforto para sua família, com um amplo quintal que permita a instalação de uma piscina ou que já venha equipada com uma."
+                            </pre>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="text-2xl font-semibold text-primary">2. Imóvel</h3>
+                        <p class="text-gray-600">
+                            Fornece detalhes específicos sobre o imóvel recomendado, incluindo tipo, localização e
+                            características.
+                        </p>
+                        <div class="bg-black/90 p-6 rounded-lg">
+                            <pre class="text-green-400 font-mono text-xs">
+"imovel": {
+"tipo": "Casa",
+"localizacao": ["Barreiro", "Estoril"],
+"cidade": "Belo Horizonte",
+"estado": "MG",
+"tamanho_m2": 250,
+"quartos": 4,
+"suites": 1,
+"banheiros": 3,
+"vagas_garagem": 3,
+"quintal": {
+  "espaco_para_piscina": true,
+  "piscina_instalada": false
+}
+}
+                            </pre>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4" data-aos="fade-up" data-aos-delay="400">
+                        <h3 class="text-2xl font-semibold text-primary">3. Diferenciais</h3>
+                        <p class="text-gray-600">
+                            Destaca as características únicas e vantagens do imóvel recomendado.
+                        </p>
+                        <div class="bg-black/90 p-6 rounded-lg">
+                            <pre class="text-green-400 font-mono text-xs">
+"diferenciais": [
+"Ambiente espaçoso para",
+"privacidade e conforto",
+"Localização estratégica",
+"Área externa com lazer"
+]
+                            </pre>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4" data-aos="fade-up" data-aos-delay="500">
+                        <h3 class="text-2xl font-semibold text-primary">4. Preço Estimado</h3>
+                        <p class="text-gray-600">
+                            Fornece uma faixa de preço estimada para o imóvel recomendado.
+                        </p>
+                        <div class="bg-black/90 p-6 rounded-lg">
+                            <pre class="text-green-400 font-mono text-xs">
+"preco_estimado": {
+"min": 900000,
+"max": 1500000
+}
+                            </pre>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4" data-aos="fade-up" data-aos-delay="600">
+                        <h3 class="text-2xl font-semibold text-primary">5. Proximidades</h3>
+                        <p class="text-gray-600">
+                            Lista os serviços e comodidades próximos ao imóvel recomendado.
+                        </p>
+                        <div class="bg-black/90 p-6 rounded-lg">
+                            <pre class="text-green-400 font-mono text-xs">
+"proximidades": [
+"Escolas",
+"Comércios",
+"Transporte público"
+]
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="700">
+                    <button class="bg-primary text-white px-6 py-3 rounded-md hover:bg-primary/90 transition-colors inline-flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-white"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
+                        Obter Chave de API
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="py-24">
+            <div class="container mx-auto px-4 space-y-12">
+                <h2 class="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl" data-aos="fade-up">
+                    Planos e Preços
+                </h2>
+                <div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 lg:grid-cols-3">
+                    <div class="bg-white rounded-lg border p-6 shadow-sm flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-2xl font-bold mb-4">Básico</h3>
+                        <p class="text-4xl font-bold mb-6">
+                            R$ 99
+                            <span class="text-sm font-normal">/mês</span>
+                        </p>
+                        <ul class="space-y-2 text-sm mb-6">
+                            <li>Até 1.000 requisições/mês</li>
+                            <li>Suporte por email</li>
+                            <li>Acesso à API básica</li>
+                        </ul>
+                        <button class="w-full bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors">
+                            Escolher Plano
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-lg border p-6 shadow-sm flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-2xl font-bold mb-4">Profissional</h3>
+                        <p class="text-4xl font-bold mb-6">
+                            R$ 299
+                            <span class="text-sm font-normal">/mês</span>
+                        </p>
+                        <ul class="space-y-2 text-sm mb-6">
+                            <li>Até 10.000 requisições/mês</li>
+                            <li>Suporte prioritário</li>
+                            <li>Acesso à API avançada</li>
+                            <li>Análise de mercado</li>
+                        </ul>
+                        <button class="w-full bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors">
+                            Escolher Plano
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-lg border p-6 shadow-sm flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="text-2xl font-bold mb-4">Empresarial</h3>
+                        <p class="text-4xl font-bold mb-6">
+                            Personalizado
+                        </p>
+                        <ul class="space-y-2 text-sm mb-6">
+                            <li>Requisições ilimitadas</li>
+                            <li>Suporte 24/7</li>
+                            <li>API personalizada</li>
+                            <li>Integração completa</li>
+                        </ul>
+                        <button class="w-full bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors">
+                            Fale Conosco
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-24">
+            <div class="container mx-auto px-4 space-y-12">
+                <h2 class="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl" data-aos="fade-up">
+                    Sobre a Aimoveis
+                </h2>
+                <div class="mx-auto max-w-3xl text-center" data-aos="fade-up" data-aos-delay="100">
+                    <p class="text-lg text-gray-600">
+                        A Aimoveis é uma empresa inovadora que utiliza inteligência artificial para revolucionar o mercado
+                        imobiliário. Nossa missão é conectar pessoas aos imóveis ideais, simplificando o processo de busca e
+                        tornando-o mais eficiente e personalizado.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t py-8">
+        <div class="container mx-auto px-4 flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p class="text-sm text-gray-600">
+                © 2025 Aimoveis. Todos os direitos reservados.
+            </p>
+            <div class="flex items-center space-x-4">
+                <a href="termos-e-condicoes.html" class="text-sm text-gray-600 hover:text-primary">Termos</a>
+                <a href="#" class="text-sm text-gray-600 hover:text-primary">Privacidade</a>
+                <a href="#" class="text-sm text-gray-600 hover:text-primary">Contato</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+            easing: 'ease-in-out'
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('[data-collapse-toggle="navbar-sticky"]');
+        const mobileMenu = document.getElementById('navbar-sticky');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

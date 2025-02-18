@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos e Condições - AImóveis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: "hsl(204, 98%, 61%)", // #39a8fd
+                            foreground: "hsl(0, 0%, 100%)", // White text for contrast
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen flex-col">
+    <header id="main-header" class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 transition-all duration-300">
+        <div class="container mx-auto flex h-16 items-center justify-between px-4">
+            <a href="index.html" class="flex items-center">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Design%20sem%20nome%20(1)-FdPpU1arWajG6dSjrQ8p0zUj6khZKb.png" alt="Aimoveis Logo" class="h-12 w-auto">
+            </a>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <a href="index.html#hero" class="transition-colors hover:text-primary">Início</a>
+                <a href="index.html#properties" class="transition-colors hover:text-primary">Imóveis</a>
+                <a href="index.html#features" class="transition-colors hover:text-primary">Recursos</a>
+                <a href="index.html#api" class="transition-colors hover:text-primary">API</a>
+                <a href="index.html#pricing" class="transition-colors hover:text-primary">Preços</a>
+                <a href="index.html#about" class="transition-colors hover:text-primary">Sobre</a>
+            </nav>
+            <button class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors">
+                Começar Agora
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-1 bg-gray-50">
+        <section class="py-24">
+            <div class="container mx-auto px-4 space-y-12">
+                <h1 class="text-4xl font-bold tracking-tighter text-center sm:text-5xl md:text-6xl" data-aos="fade-up">
+                    Termos e Condições
+                </h1>
+                <div class="max-w-3xl mx-auto space-y-8" data-aos="fade-up" data-aos-delay="100">
+                    <p class="text-gray-600">
+                        Bem-vindo aos Termos e Condições da AImóveis. Ao utilizar nossa plataforma e serviços, você concorda com os termos descritos abaixo. Por favor, leia atentamente.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-semibold text-primary">1. Aceitação dos Termos</h2>
+                        <p class="text-gray-600">
+                            Ao acessar ou usar a plataforma AImóveis, você concorda em cumprir e estar vinculado a estes Termos e Condições. Se você não concordar com qualquer parte destes termos, não poderá usar nossos serviços.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-semibold text-primary">2. Descrição do Serviço</h2>
+                        <p class="text-gray-600">
+                            A AImóveis fornece uma API de recomendação de imóveis baseada em inteligência artificial. Nosso serviço visa auxiliar na busca e recomendação de imóveis com base nas preferências e necessidades dos usuários.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-semibold text-primary">3. Uso da API</h2>
+                        <p class="text-gray-600">
+                            O uso da nossa API está sujeito a limites de requisições conforme o plano escolhido. É proibido o uso abusivo ou que viole nossas políticas de uso justo. A AImóveis se reserva o direito de suspender ou encerrar o acesso à API em caso de violação destes termos.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-semibold text-primary">4. Privacidade e Proteção de Dados</h2>
+                        <p class="text-gray-600">
+                            Respeitamos sua privacidade e protegemos seus dados pessoais de acordo com nossa Política de Privacidade. Ao usar nossos serviços, você concorda com a coleta e uso de informações conforme descrito em nossa política.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-semibold text-primary">5. Propriedade Intelectual</h2>
+                        <p class="text-gray-600">
+                            Todo o conteúdo, código, algoritmos e materiais disponíveis através da AImóveis são de nossa propriedade ou licenciados para nós. É proibida a reprodução, distribuição ou uso não autorizado deste material.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-semibold text-primary">6. Limitação de Responsabilidade</h2>
+                        <p class="text-gray-600">
+                            A AImóveis não se responsabiliza por quaisquer danos diretos, indiretos, incidentais ou consequenciais resultantes do uso ou incapacidade de usar nossos serviços. As recomendações fornecidas são baseadas em algoritmos de IA e não substituem a avaliação profissional de um corretor de imóveis.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-semibold text-primary">7. Modificações dos Termos</h2>
+                        <p class="text-gray-600">
+                            Reservamo-nos o direito de modificar estes Termos e Condições a qualquer momento. As alterações entrarão em vigor imediatamente após a publicação na plataforma. O uso contínuo de nossos serviços após as alterações constitui aceitação dos novos termos.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-semibold text-primary">8. Lei Aplicável</h2>
+                        <p class="text-gray-600">
+                            Estes Termos e Condições são regidos pelas leis do Brasil. Qualquer disputa relacionada a estes termos será submetida à jurisdição exclusiva dos tribunais brasileiros.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-semibold text-primary">9. Contato</h2>
+                        <p class="text-gray-600">
+                            Se você tiver dúvidas sobre estes Termos e Condições, entre em contato conosco através do e-mail: suporte@aimoveis.com
+                        </p>
+                    </div>
+
+                    <p class="text-gray-600 italic">
+                        Última atualização: 16 de Fevereiro de 2025
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t py-8">
+        <div class="container mx-auto px-4 flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p class="text-sm text-gray-600">
+                © 2025 Aimoveis. Todos os direitos reservados.
+            </p>
+            <div class="flex items-center space-x-4">
+                <a href="termos-e-condicoes.html" class="text-sm text-gray-600 hover:text-primary">Termos</a>
+                <a href="#" class="text-sm text-gray-600 hover:text-primary">Privacidade</a>
+                <a href="#" class="text-sm text-gray-600 hover:text-primary">Contato</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+            easing: 'ease-in-out'
+        });
+
+        // Create Lucide icons
+        lucide.createIcons();
+
+        // Header scroll effect
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('[data-collapse-toggle="navbar-sticky"]');
+        const mobileMenu = document.getElementById('navbar-sticky');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

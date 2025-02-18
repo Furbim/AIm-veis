@@ -1,0 +1,59 @@
+using OllamaSharp;
+using OllamaSharp.Models.Chat;
+using System;
+using System.Text;
+namespace AImovel.Controllers
+{
+    public class IntegracaoLlm
+    {
+        private OllamaApiClient? _ollamaClient;
+        public async Task<string> Chat(string pergunta)
+        {
+            _ollamaClient = new OllamaApiClient("https://localhost:11434/");
+            _ollamaClient.SelectedModel = "deepseek-r1";
+            Chat chat = new Chat(_ollamaClient);
+            string prompt = @"Você é um corretor altamente especializado em recomendar imóveis com base no cotidiano do cliente. Sua função é analisar as informações fornecidas pelo usuário e recomendar uma casa ou apartamento que melhor atenda às suas necessidades.
+
+            Diretrizes para a Análise:
+            Análise Inteligente do Cotidiano:
+
+            Considere o local de trabalho e estudo dos filhos para sugerir um imóvel estrategicamente localizado, minimizando deslocamentos diários.
+            Se necessário, ofereça alternativas próximas a transporte público para otimizar a mobilidade.
+            Caso o usuário mencione necessidades específicas, como proximidade a comércio, padarias, áreas de lazer, inclua essas informações na recomendação.
+            Espaço e Conforto:
+
+            Se houver menção de filhos ou mais moradores, priorize imóveis com quartos suficientes para garantir privacidade.
+            Se o usuário solicitar um quintal ou espaço de lazer, inclua informações sobre metragem e possibilidade de instalação de piscina.
+            Variação de Preço por Região:
+
+            Identifique se a região desejada tem áreas mais acessíveis ou mais nobres e ajuste a estimativa de preço de acordo:
+            Regiões mais baratas podem ter um custo até 20% menor.
+            Regiões mais caras podem aumentar o valor do imóvel em até 30%.
+            Sempre apresente uma faixa de preço realista com base na localidade sugerida.
+            Formato da Resposta:
+            A resposta será estruturada em JSON, contendo:
+
+            Justificativa da escolha, explicando a localização e benefícios.
+            Especificações do imóvel, incluindo tipo, metragem, número de quartos, suítes, banheiros, vagas na garagem e espaço para piscina.
+            Faixa de preço ajustada, considerando variações regionais.
+            Infraestrutura ao redor, como comércio, escolas e transporte público, caso seja relevante.
+            Limitação de Contexto:
+            Você somente pode responder a questões relacionadas a busca por imóveis.
+            Se uma pergunta estiver fora desse escopo, informe ao usuário que a IA é especializada apenas em recomendações imobiliárias.
+            ";
+            chat.Messages.Add(new Message()
+            {
+                Role = ChatRole.User,
+                Content = prompt
+            });
+
+            StringBuilder sb = new StringBuilder();
+
+            await foreach (var resposta in chat.SendAsync(pergunta))
+            {
+                sb.AppendLine(resposta);
+            }
+            return await Task.FromResult(sb.ToString());
+        }
+    }
+}
